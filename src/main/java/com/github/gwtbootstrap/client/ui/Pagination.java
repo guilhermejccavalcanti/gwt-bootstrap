@@ -24,21 +24,17 @@ import com.google.gwt.user.client.ui.Widget;
 import com.github.gwtbootstrap.client.ui.base.*;
 import com.github.gwtbootstrap.client.ui.constants.Device;
 import com.google.gwt.user.client.ui.*;
-
 import java.util.Iterator;
 
-//@formatter:off
-/**
- * Multi-Page Pagination
- *
- * @since 2.0.4.0
- * @author Dominik Mayer
- * @author Danilo Reinert
- */
 //@formatter:on
 public class Pagination extends Composite implements HasStyle, IsResponsive, HasId, InsertPanel.ForIsWidget, HasWidgets.ForIsWidget {
 
-    private final DivWidget paginationDiv = new DivWidget();;
+    private final DivWidget paginationDiv = new DivWidget();
+
+    ;
+
+    ;
+
     private UnorderedList list = new UnorderedList();
 
     public Pagination() {
@@ -48,15 +44,77 @@ public class Pagination extends Composite implements HasStyle, IsResponsive, Has
         initWidget(paginationDiv);
     }
 
+    @Override
+    public void add(IsWidget w) {
+        list.add(w);
+    }
+
+    @Override
+    public boolean remove(IsWidget w) {
+        return paginationDiv.remove(w);
+    }
+
+    @Override
+    public void insert(IsWidget w, int beforeIndex) {
+        paginationDiv.insert(w, beforeIndex);
+    }
+
+    @Override
+    public int getWidgetIndex(IsWidget child) {
+        return paginationDiv.getWidgetIndex(child);
+    }
+
+    /**
+     * Gets the child widget at the specified index.
+     *
+     * @param index the child widget's index
+     * @return the child widget
+     */
+    @Override
+    public Widget getWidget(int index) {
+        return list.getWidget(index);
+    }
+
+    /**
+     * Gets the number of child widgets in this panel.
+     *
+     * @return the number of children
+     */
+    @Override
+    public int getWidgetCount() {
+        return list.getWidgetCount();
+    }
+
+    /**
+     * Gets the index of the specified child widget.
+     *
+     * @param child the widget to be found
+     * @return the widget's index, or <code>-1</code> if it is not a child of this
+     *         panel
+     */
+    @Override
+    public int getWidgetIndex(Widget child) {
+        return list.getWidgetIndex(child);
+    }
+
+    /**
+     * Removes the widget at the specified index.
+     *
+     * @param index the index of the widget to be removed
+     * @return <code>false</code> if the widget is not present
+     */
+    @Override
+    public boolean remove(int index) {
+        return list.remove(index);
+    }
+
     public static enum PaginationSize implements Style {
-        MINI,
-        SMALL,
-        NORMAL,
-        LARGE;
+
+        MINI(), SMALL(), NORMAL(), LARGE();
 
         @Override
         public String get() {
-            if(this != NORMAL) {
+            if (this != NORMAL) {
                 return "pagination-" + this.name().toLowerCase();
             }
             return "";
@@ -170,70 +228,6 @@ public class Pagination extends Composite implements HasStyle, IsResponsive, Has
         return list.remove(w);
     }
 
-    @Override
-    public void add(IsWidget w) {
-        list.add(w);
-    }
-
-    @Override
-    public boolean remove(IsWidget w) {
-        return paginationDiv.remove(w);
-    }
-
-    @Override
-    public void insert(IsWidget w, int beforeIndex) {
-        paginationDiv.insert(w, beforeIndex);
-    }
-
-    @Override
-    public int getWidgetIndex(IsWidget child) {
-        return paginationDiv.getWidgetIndex(child);
-    }
-
-    /**
-     * Gets the child widget at the specified index.
-     *
-     * @param index the child widget's index
-     * @return the child widget
-     */
-    @Override
-    public Widget getWidget(int index) {
-        return list.getWidget(index);
-    }
-
-    /**
-     * Gets the number of child widgets in this panel.
-     *
-     * @return the number of children
-     */
-    @Override
-    public int getWidgetCount() {
-        return list.getWidgetCount();
-    }
-
-    /**
-     * Gets the index of the specified child widget.
-     *
-     * @param child the widget to be found
-     * @return the widget's index, or <code>-1</code> if it is not a child of this
-     *         panel
-     */
-    @Override
-    public int getWidgetIndex(Widget child) {
-        return list.getWidgetIndex(child);
-    }
-
-    /**
-     * Removes the widget at the specified index.
-     *
-     * @param index the index of the widget to be removed
-     * @return <code>false</code> if the widget is not present
-     */
-    @Override
-    public boolean remove(int index) {
-        return list.remove(index);
-    }
-
     /**
      * Inserts another widget into this one.
      *
@@ -263,5 +257,4 @@ public class Pagination extends Composite implements HasStyle, IsResponsive, Has
         add(pageLink);
         return pageLink;
     }
-
 }
